@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap-rtl.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <h2>welcome you !!!</h2>
+            <div class="list-group"></div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.js"></script>
+<script>
+    $(function(){
+
+        $.ajax({
+            url:"http://localhost:3000/admin/to_list",
+            type:'post',
+            xhrFields: {
+                withCredentials: true
+            },
+            success:function(data){
+                var strHtml = '';
+                data.map(function(value,i){
+                    strHtml +=
+                        '<a href="#" class="list-group-item">'+
+                        '<h4 class="list-group-item-heading">'+value.title+'</h4>'+
+                        '<p class="list-group-item-text">'+value.content+'</p>'+
+                        '</a>'
+                })
+                $(".list-group").html(strHtml)
+            }
+        })
+    })
+</script>
+</html>
